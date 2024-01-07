@@ -1,13 +1,17 @@
 import React from 'react';
-import styles from '../Design/homePageDesign.css';
+import css from '../Design/HomePageDesign.module.css';
+import vector from '../../Images/vectorgray-D.png';
 
-export function homePageDesign() {
+const HomePageDesign = ({ children }) => {
   return (
-    <section className={styles.design}>
-      <div className={styles.design_vector}></div>
-      <div className={styles.design_strawberry}></div>
-      <div className={styles.design_layer}></div>
-      <div className={styles.design_banana}></div>
+    <section className={css.design}>
+      <div className={css.design_vector}></div>
+      <div className={css.design_strawberry}></div>
+      <div className={css.design_layer}></div>
+      <div className={css.design_banana}></div>
+      {children}
     </section>
   );
-}
+};
+
+export default HomePageDesign;
