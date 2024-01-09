@@ -15,5 +15,5 @@ export default function PrivateRoutes() {
     }
   }, [isAuth, dispatch]);
 
-  return isAuth ? <Outlet /> : <Navigate to="/" />;
+  return isAuth ? <Outlet /> : <Navigate to="/login" />;
 }

@@ -36,12 +36,12 @@ export default function DailyCalorieIntake() {
   };
 
   return (
-    <div className="css.App">
-      <h2 className="css.title_intake">
+    <div className={css.App}>
+      <h2 className={css.title_intake}>
         Calculate your daily calorie intake right now
       </h2>
       <form>
-        <div className="css.left-inputs">
+        <div className={css.left_inputs}>
           <label htmlFor="leftInput1">Height*</label>
           <input
             type="text"
@@ -70,7 +70,7 @@ export default function DailyCalorieIntake() {
           />
         </div>
 
-        <div className="css.right-inputs">
+        <div className={css.right_inputs}>
           <label htmlFor="rightInput1">Desired weight *</label>
           <input
             type="text"
@@ -88,8 +88,7 @@ export default function DailyCalorieIntake() {
             value={rightInputs.rightInput2}
             onChange={handleRightInputChange}
           />
-          <div className="css.checkbox-row">
-            <label htmlFor="checkbox1">1</label>
+          <div className={css.checkbox_row}>
             <input
               type="checkbox"
               id="checkbox1"
@@ -98,7 +97,7 @@ export default function DailyCalorieIntake() {
               onChange={handleCheckboxChange}
             />
 
-            <label htmlFor="checkbox2">2</label>
+            <label htmlFor="checkbox1">1</label>
             <input
               type="checkbox"
               id="checkbox2"
@@ -106,8 +105,8 @@ export default function DailyCalorieIntake() {
               checked={checkboxes.checkbox2}
               onChange={handleCheckboxChange}
             />
+            <label htmlFor="checkbox2">2</label>
 
-            <label htmlFor="checkbox3">3</label>
             <input
               type="checkbox"
               id="checkbox3"
@@ -115,8 +114,8 @@ export default function DailyCalorieIntake() {
               checked={checkboxes.checkbox3}
               onChange={handleCheckboxChange}
             />
+            <label htmlFor="checkbox3">3</label>
 
-            <label htmlFor="checkbox4">4</label>
             <input
               type="checkbox"
               id="checkbox4"
@@ -124,7 +123,9 @@ export default function DailyCalorieIntake() {
               checked={checkboxes.checkbox4}
               onChange={handleCheckboxChange}
             />
+            <label htmlFor="checkbox4">4</label>
           </div>
+          <button className={css.buttom_home}>Start losing weight</button>
         </div>
       </form>
     </div>
