@@ -11,6 +11,7 @@ import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import logoImage from '../../Images/logo-D.png';
+import { Link } from 'react-router-dom';
 const pages = ['Log In', 'Registration'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -116,7 +117,8 @@ function ResponsiveAppBar() {
             {pages.map(page => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                component={Link}
+                to={page.toLowerCase() === 'log in' ? '/login' : '/register'}
                 sx={{ my: 2, color: '#9B9FAA', display: 'block' }}
               >
                 {page}

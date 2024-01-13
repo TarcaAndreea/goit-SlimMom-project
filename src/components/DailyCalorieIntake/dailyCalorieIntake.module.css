@@ -1,22 +1,24 @@
 .title_intake {
   font-family: Verdana;
-  font-size: 34px;
+  font-size: 18px;
   font-weight: 700;
-  line-height: 48px;
+  line-height: 25.2px;
   letter-spacing: 0em;
   text-align: left;
+  width: 280px;
+  padding: 20px;
 }
 .App {
   display: flex;
   flex-direction: column;
-  margin-top: 146px;
-  width: 608px;
+  margin-top: 112px;
+  width: 240px;
   padding: 20px;
 }
 
 form {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 15px;
 
   margin-left: 16px;
@@ -28,6 +30,9 @@ form {
 .right_inputs {
   display: flex;
   flex-direction: column;
+}
+.label_checkbox {
+  margin-right: 30px;
 }
 label {
   font-family: Verdana;
@@ -52,19 +57,21 @@ input {
 .checkbox_row label {
   display: flex;
   align-items: center;
+  font-size: 14px;
 }
 
 .checkbox_row input {
   margin: 0;
-  border-radius: 50%;
+  width: 20px;
 }
 .checkbox_row {
   display: flex;
   flex-direction: row;
-  gap: 5px;
+
   width: 240px;
   margin-top: 0px;
 }
+
 .buttom_home {
   padding: 13px 20px;
   border: 1 px solid;
@@ -79,5 +86,156 @@ input {
   line-height: 17px;
   letter-spacing: 0.04em;
   text-align: center;
-  margin-top: 100px;
+  margin-top: 55px;
+}
+@media screen and (min-width: 768px) {
+  .title_intake {
+    font-size: 34px;
+    line-height: 47.5px;
+    width: 608px;
+    padding-left: 32px;
+  }
+  .App {
+    display: flex;
+    flex-direction: column;
+    margin-top: 70px;
+    width: 608px;
+    padding: 32px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+
+    margin-left: 16px;
+  }
+  .left_inputs {
+    display: flex;
+    flex-direction: column;
+  }
+  .right_inputs {
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    font-family: Verdana;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 17px;
+    letter-spacing: 0.04em;
+    text-align: left;
+    color: #9b9faa;
+    margin-top: 10px;
+  }
+
+  input {
+    padding: 5px;
+    margin-bottom: 35px;
+    width: 240px;
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+  }
+
+  .checkbox_row label {
+    display: flex;
+    align-items: center;
+  }
+
+  .checkbox_row input {
+    margin: 0;
+    border-radius: 50%;
+  }
+  .checkbox_row {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    width: 240px;
+    margin-top: 0px;
+  }
+  .buttom_home {
+    margin-top: 80px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .title_intake {
+    line-height: 48px;
+    width: 608px;
+  }
+  .App {
+    display: flex;
+    flex-direction: column;
+    margin-top: 146px;
+    width: 608px;
+    padding: 20px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+
+    margin-left: 16px;
+  }
+  .left_inputs {
+    display: flex;
+    flex-direction: column;
+  }
+  .right_inputs {
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    font-family: Verdana;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 17px;
+    letter-spacing: 0.04em;
+    text-align: left;
+    color: #9b9faa;
+    margin-top: 10px;
+  }
+
+  input {
+    padding: 5px;
+    margin-bottom: 35px;
+    width: 240px;
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+  }
+
+  .checkbox_row label {
+    display: flex;
+    align-items: center;
+  }
+
+  .checkbox_row input {
+    margin: 0;
+    border-radius: 50%;
+  }
+  .checkbox_row {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    width: 240px;
+    margin-top: 0px;
+  }
+  .buttom_home {
+    padding: 13px 20px;
+    border: 1 px solid;
+    border-color: transparent;
+    border-radius: 30px;
+    width: 210px;
+    background: #fc842d;
+    color: white;
+    font-family: Verdana;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 17px;
+    letter-spacing: 0.04em;
+    text-align: center;
+    margin-top: 100px;
+  }
 }

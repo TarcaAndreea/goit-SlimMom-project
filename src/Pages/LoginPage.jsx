@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Button,
-  Typography,
-  Box,
-  TextField,
-  Container,
-  Avatar,
-  FormControlLabel,
-  Checkbox,
-} from '@mui/material';
+import { Button, Typography, Box, TextField } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
+import ResponsiveAppBar from 'components/NavBar/NavBar';
+import HomePageDesign from 'components/Design/HomePageDesign';
 import { selectIsAuthenticated } from 'Redux/selectors';
-
+import css from './design.module.css';
 import { login } from 'Redux/Operation';
+
 export default function Loginpage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -35,8 +28,7 @@ export default function Loginpage() {
 
   const handleSubmit = event => {
     event.preventDefault();
-
-    dispatch(login({ email: email, password: password }));
+    dispatch(login({ email, password }));
   };
 
   useEffect(() => {
@@ -44,56 +36,60 @@ export default function Loginpage() {
   }, [isAuth, navigate]);
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}></Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            onChange={handleChangeInput}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            onChange={handleChangeInput}
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+    <HomePageDesign>
+      <ResponsiveAppBar />
+      <div className={css.login_page}>
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Typography component="h1" variant="h5">
+            Log in
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1, display: 'flex', flexDirection: 'column' }}
           >
-            Sign In
-          </Button>
+            <TextField
+              id="standard-basic"
+              label="Email *"
+              variant="standard"
+              type="email"
+            />
+            <TextField
+              id="outlined-password-input"
+              label="Password *"
+              type="password"
+              autoComplete="current-password"
+              variant="standard"
+            />
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+              }}
+            >
+              <Button
+                type="submit"
+                fullWidth
+                variant="outlined"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Log in
+              </Button>
+              <Button variant="outlined" type="submit" sx={{ mt: 3, mb: 2 }}>
+                Register
+              </Button>
+            </Box>
+          </Box>
         </Box>
-      </Box>
-    </Container>
+      </div>
+    </HomePageDesign>
   );
 }

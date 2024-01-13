@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { register } from 'Redux/Operation';
 import { useNavigate } from 'react-router-dom';
 import { selectIsAuthenticated } from 'Redux/selectors';
-
+import ResponsiveAppBar from 'components/NavBar/NavBar';
+import HomePageDesign from 'components/Design/HomePageDesign';
 export default function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,45 +34,51 @@ export default function RegisterPage() {
   }, [isAuth, navigate]);
 
   return (
-    <Box
-      onSubmit={handleSubmit}
-      component="form"
-      sx={{
-        marginTop: '20%',
-        width: '100%',
-        maxWidth: '300px',
-        backgroundColor: 'white',
-        padding: '30px',
-        boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: '20px',
-      }}
-    >
-      <Typography variant="h4" sx={{ fontSize: '30px', color: 'gray' }}>
-        Register
-      </Typography>
+    <HomePageDesign>
+      <ResponsiveAppBar />
+      <Box
+        onSubmit={handleSubmit}
+        component="form"
+        sx={{
+          marginTop: '20%',
 
-      <TextField
-        type="email"
-        name="email"
-        placeholder="Email"
-        variant="outlined"
-        fullWidth
-        onChange={handleChangeInput}
-      />
-      <TextField
-        type="password"
-        name="password"
-        placeholder="Password"
-        variant="outlined"
-        fullWidth
-        onChange={handleChangeInput}
-      />
-      <Button type="submit" variant="contained">
-        Register
-      </Button>
-    </Box>
+          padding: '30px',
+
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '20px',
+        }}
+      >
+        <Typography variant="h4" sx={{ fontSize: '30px', color: 'gray' }}>
+          Register
+        </Typography>
+        <TextField
+          type="name"
+          name="name"
+          placeholder="Name"
+          variant="standard"
+          fullWidth
+          onChange={handleChangeInput}
+        />
+        <TextField
+          type="email"
+          name="email"
+          variant="standard"
+          fullWidth
+          onChange={handleChangeInput}
+        />
+        <TextField
+          type="password"
+          name="password"
+          variant="standard"
+          fullWidth
+          onChange={handleChangeInput}
+        />
+        <Button type="submit" variant="contained">
+          Register
+        </Button>
+      </Box>
+    </HomePageDesign>
   );
 }

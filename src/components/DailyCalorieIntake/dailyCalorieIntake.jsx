@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import css from '../DailyCalorieIntake/dailyCalorieIntake.module.css';
-
+import { ModalComponent } from 'components/Modal/Modal';
 export default function DailyCalorieIntake() {
   const [leftInputs, setLeftInputs] = useState({
     leftInput1: '',
@@ -34,7 +34,16 @@ export default function DailyCalorieIntake() {
     const { name, checked } = e.target;
     setCheckboxes(prevCheckboxes => ({ ...prevCheckboxes, [name]: checked }));
   };
+  const [openModal, setOpenModal] = useState(false);
+  const handleModalOpen = e => {
+    e.preventDefault();
+    console.log('modal opened');
+    setOpenModal(true);
+  };
 
+  const handleModalClose = () => {
+    setOpenModal(false);
+  };
   return (
     <div className={css.App}>
       <h2 className={css.title_intake}>
@@ -49,6 +58,7 @@ export default function DailyCalorieIntake() {
             name="leftInput1"
             value={leftInputs.leftInput1}
             onChange={handleLeftInputChange}
+            autoFocus
           />
 
           <label htmlFor="leftInput2">Age *</label>
@@ -58,6 +68,7 @@ export default function DailyCalorieIntake() {
             name="leftInput2"
             value={leftInputs.leftInput2}
             onChange={handleLeftInputChange}
+            autoFocus
           />
 
           <label htmlFor="leftInput3">Current weight *</label>
@@ -67,6 +78,7 @@ export default function DailyCalorieIntake() {
             name="leftInput3"
             value={leftInputs.leftInput3}
             onChange={handleLeftInputChange}
+            autoFocus
           />
         </div>
 
@@ -78,6 +90,7 @@ export default function DailyCalorieIntake() {
             name="rightInput1"
             value={rightInputs.rightInput1}
             onChange={handleRightInputChange}
+            autoFocus
           />
 
           <label htmlFor="rightInput2">Blood type *</label>
@@ -90,44 +103,55 @@ export default function DailyCalorieIntake() {
           />
           <div className={css.checkbox_row}>
             <input
-              type="checkbox"
+              type="radio"
               id="checkbox1"
               name="checkbox1"
               checked={checkboxes.checkbox1}
               onChange={handleCheckboxChange}
             />
 
-            <label htmlFor="checkbox1">1</label>
+            <label htmlFor="checkbox1" className="css.label_checkbox">
+              1
+            </label>
             <input
-              type="checkbox"
+              type="radio"
               id="checkbox2"
               name="checkbox2"
               checked={checkboxes.checkbox2}
               onChange={handleCheckboxChange}
             />
-            <label htmlFor="checkbox2">2</label>
+            <label htmlFor="checkbox2" className="css.label_checkbox">
+              2
+            </label>
 
             <input
-              type="checkbox"
+              type="radio"
               id="checkbox3"
               name="checkbox3"
               checked={checkboxes.checkbox3}
               onChange={handleCheckboxChange}
             />
-            <label htmlFor="checkbox3">3</label>
+            <label htmlFor="checkbox3" className="css.label_checkbox">
+              3
+            </label>
 
             <input
-              type="checkbox"
+              type="radio"
               id="checkbox4"
               name="checkbox4"
               checked={checkboxes.checkbox4}
               onChange={handleCheckboxChange}
             />
-            <label htmlFor="checkbox4">4</label>
+            <label htmlFor="checkbox4" className="css.label_checkbox">
+              4
+            </label>
           </div>
-          <button className={css.buttom_home}>Start losing weight</button>
         </div>
       </form>
+      <button className={css.buttom_home} onClick={handleModalOpen}>
+        Start losing weight
+      </button>
+      <ModalComponent isOpen={openModal} onClose={handleModalClose} />
     </div>
   );
 }
