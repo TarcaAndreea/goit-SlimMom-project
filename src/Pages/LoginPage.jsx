@@ -61,6 +61,9 @@ export default function Loginpage() {
               label="Email *"
               variant="standard"
               type="email"
+              name="email"
+              value={email}
+              onChange={handleChangeInput}
             />
             <TextField
               id="outlined-password-input"
@@ -68,6 +71,9 @@ export default function Loginpage() {
               type="password"
               autoComplete="current-password"
               variant="standard"
+              name="password"
+              value={password}
+              onChange={handleChangeInput}
             />
             <Box
               sx={{
