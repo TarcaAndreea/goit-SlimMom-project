@@ -1,6 +1,5 @@
 import React from 'react';
 import css from '../Design/HomePageDesign.module.css';
-import vector from '../../Images/vectorgray-D.png';
 
 const HomePageDesign = ({ children }) => {
   return (
