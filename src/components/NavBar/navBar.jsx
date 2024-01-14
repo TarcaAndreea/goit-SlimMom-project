@@ -35,6 +35,10 @@ function ResponsiveAppBar() {
     setAnchorElNav(event.currentTarget);
   };
 
+  const handleOpenUserMenu = event => {
+    setAnchorElUser(event.currentTarget);
+  };
+
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -46,11 +50,13 @@ function ResponsiveAppBar() {
   const navigate = useNavigate();
 
   const handleRegisterClick = () => {
+    console.log('Handle Register Click');
     navigate('/register');
     setActiveButton('Registration');
   };
 
   const handleLoginClick = () => {
+    console.log('Handle Login Click');
     navigate('/login');
     setActiveButton('Log In');
   };
@@ -152,6 +158,7 @@ function ResponsiveAppBar() {
               >
                 Log In
               </Button>
+
               <Button
                 sx={{
                   mx: 1,
@@ -181,7 +188,7 @@ function ResponsiveAppBar() {
                   horizontal: 'right',
                 }}
                 open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
+                onClose={handleOpenUserMenu}
               >
                 {settings.map(setting => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>

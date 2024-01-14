@@ -1,28 +1,27 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-
-import { store } from 'Redux/store';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import theme from '../thems';
 import HomePage from '../Pages/HomePage';
 import RegisterPage from '../Pages/RegisterPage';
-import Loginpage from '../Pages/LoginPage';
-import ContactsPage from '../Pages/CalculatorPage';
-import NotFoundPage from 'Pages/NotFoundPage';
-import PrivateRoutes from './Routes/PrivateRoutes';
+import LoginPage from '../Pages/LoginPage';
+import NotFoundPage from '../Pages/NotFoundPage';
 
 export const App = () => {
   return (
-    <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <div>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/login" element={<Loginpage />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>
       </div>
-    </Provider>
+    </ThemeProvider>
   );
 };

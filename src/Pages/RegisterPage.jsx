@@ -1,40 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Typography, Box, TextField } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
-import { useDispatch, useSelector } from 'react-redux';
-import { register } from 'Redux/Operation';
-import { useNavigate } from 'react-router-dom';
-import { selectIsAuthenticated } from 'Redux/selectors';
+import axios from 'axios';
+
 import ResponsiveAppBar from 'components/NavBar/NavBar';
 import HomePageDesign from 'components/Design/HomePageDesign';
 import Loader from 'components/Loader/Loader';
 
-export default function RegisterPage() {
+const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const dispatch = useDispatch();
+  const [name, setName] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const isAuth = useSelector(selectIsAuthenticated);
+  const handleRegister = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post('http://localhost:5000/api/register', {
+        name,
+        email,
+        password,
+      });
 
-  const handleChangeInput = event => {
-    const { name, value } = event.target;
-    if (name === 'email') {
-      setEmail(value);
-    } else if (name === 'password') {
-      setPassword(value);
+      console.log('Registration successful', response.data);
+      setLoading(false);
+      // Navigare către pagina de login sau altă destinație
+      navigate('/login');
+    } catch (error) {
+      console.error('Registration failed', error.response.data);
+      setLoading(false);
+      // Poți adăuga aici gestionarea erorilor sau afișarea unui mesaj pentru utilizator
     }
   };
-
-  const handleSubmit = event => {
-    event.preventDefault();
-    dispatch(register({ email: email, password: password }));
-  };
-
-  useEffect(() => {
-    if (isAuth) navigate('/login');
-  }, [isAuth, navigate]);
 
   return (
     <HomePageDesign>
@@ -64,7 +63,6 @@ export default function RegisterPage() {
         </Typography>
         <Box
           component="form"
-          onSubmit={handleSubmit}
           noValidate
           autoComplete="off"
           sx={{
@@ -83,7 +81,8 @@ export default function RegisterPage() {
             label="Name"
             name="name"
             variant="standard"
-            onChange={handleChangeInput}
+            value={name}
+            onChange={e => setName(e.target.value)}
           />
           <TextField
             margin="normal"
@@ -93,7 +92,8 @@ export default function RegisterPage() {
             label="Email"
             name="email"
             variant="standard"
-            onChange={handleChangeInput}
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
           <TextField
             margin="normal"
@@ -104,7 +104,8 @@ export default function RegisterPage() {
             type="password"
             id="standard-textarea"
             variant="standard"
-            onChange={handleChangeInput}
+            value={password}
+            onChange={e => setPassword(e.target.value)}
           />
         </Box>
         <Box
@@ -119,7 +120,6 @@ export default function RegisterPage() {
           }}
         >
           <Button
-            type="submit"
             variant="contained"
             sx={{
               fontFamily: 'Verdana',
@@ -133,31 +133,33 @@ export default function RegisterPage() {
               backgroundColor: 'rgba(252, 132, 45, 1)',
             }}
           >
-            {isAuth === 'login' ? <Loader /> : <>Log In</>}
+            {loading ? <Loader /> : <>Log In</>}
           </Button>
-
-          <Button
-            type="submit"
-            variant="contained"
-            sx={{
-              color: 'rgba(252, 132, 45, 1)',
-              fontFamily: 'Verdana',
-              fontSize: '14px',
-              textTransform: 'unset',
-              borderRadius: '30px',
-              boxShadow: '0px 4px 10px 0px rgba(252, 132, 45, 0.5)',
-              fontWeight: '700',
-              width: '210px',
-              height: '43px',
-              marginTop: '15px',
-              backgroundColor: 'white',
-            }}
-            onClick={() => navigate('/register')}
-          >
-            <>Register</>
-          </Button>
+          <Link to="/login" style={{ textDecoration: 'none' }}>
+            <Button
+              variant="contained"
+              sx={{
+                color: 'rgba(252, 132, 45, 1)',
+                fontFamily: 'Verdana',
+                fontSize: '14px',
+                textTransform: 'unset',
+                borderRadius: '30px',
+                boxShadow: '0px 4px 10px 0px rgba(252, 132, 45, 0.5)',
+                fontWeight: '700',
+                width: '210px',
+                height: '43px',
+                marginTop: '15px',
+                backgroundColor: 'white',
+              }}
+              onClick={handleRegister}
+            >
+              <>Register</>
+            </Button>
+          </Link>
         </Box>
       </Box>
     </HomePageDesign>
   );
-}
+};
+
+export default RegisterPage;

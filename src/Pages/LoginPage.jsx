@@ -1,21 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Typography, Box, TextField } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ResponsiveAppBar from 'components/NavBar/NavBar';
 import HomePageDesign from 'components/Design/HomePageDesign';
-import { selectIsAuthenticated } from 'Redux/selectors';
-import css from './design.module.css';
-import { login } from 'Redux/Operation';
+import { Link } from 'react-router-dom';
 
 export default function Loginpage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isAuth, setIsAuth] = useState(false);
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const isAuth = useSelector(selectIsAuthenticated);
 
   const handleChangeInput = event => {
     const { name, value } = event.target;
@@ -28,7 +23,10 @@ export default function Loginpage() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(login({ email, password }));
+
+    if (email === 'test@example.com' && password === 'password') {
+      setIsAuth(true);
+    }
   };
 
   useEffect(() => {
@@ -38,64 +36,115 @@ export default function Loginpage() {
   return (
     <HomePageDesign>
       <ResponsiveAppBar />
-      <div className={css.login_page}>
-        <Box
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          mt: 20,
+        }}
+      >
+        <Typography
+          component="h1"
+          variant="h5"
           sx={{
-            marginTop: 8,
+            fontSize: '14px',
+            fontFamily: 'Verdana',
+            fontWeight: '700',
+            textTransform: 'uppercase',
+            color: 'rgba(252, 132, 45, 1)',
+            mt: 3,
+            paddingLeft: '10px',
+          }}
+        >
+          Log In
+        </Typography>
+        <Box
+          component="form"
+          noValidate
+          autoComplete="off"
+          sx={{
+            mt: 2,
+            width: '300px',
+            gap: '10px',
             display: 'flex',
             flexDirection: 'column',
+          }}
+          onClick={handleSubmit}
+        >
+          <TextField
+            margin="normal"
+            fullWidth
+            required
+            id="standard-textarea"
+            label="Email"
+            name="email"
+            variant="standard"
+            value={email}
+            onChange={handleChangeInput}
+          />
+          <TextField
+            margin="normal"
+            fullWidth
+            required
+            name="password"
+            label="Password"
+            type="password"
+            id="standard-textarea"
+            variant="standard"
+            value={password}
+            onChange={handleChangeInput}
+          />
+        </Box>
+        <Box
+          mt={3}
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            width: '450px',
             alignItems: 'center',
           }}
         >
-          <Typography component="h1" variant="h5">
-            Log in
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1, display: 'flex', flexDirection: 'column' }}
+          <Button
+            variant="contained"
+            sx={{
+              fontFamily: 'Verdana',
+              fontSize: '14px',
+              textTransform: 'unset',
+              borderRadius: '30px',
+              boxShadow: '0px 4px 10px 0px rgba(252, 132, 45, 0.5)',
+              fontWeight: '700',
+              width: '210px',
+              height: '43px',
+              backgroundColor: 'rgba(252, 132, 45, 1)',
+            }}
           >
-            <TextField
-              id="standard-basic"
-              label="Email *"
-              variant="standard"
-              type="email"
-              name="email"
-              value={email}
-              onChange={handleChangeInput}
-            />
-            <TextField
-              id="outlined-password-input"
-              label="Password *"
-              type="password"
-              autoComplete="current-password"
-              variant="standard"
-              name="password"
-              value={password}
-              onChange={handleChangeInput}
-            />
-            <Box
+            {' '}
+            Log In
+          </Button>
+          <Link to="/login" style={{ textDecoration: 'none' }}>
+            <Button
+              variant="contained"
               sx={{
-                display: 'flex',
-                flexDirection: 'row',
+                color: 'rgba(252, 132, 45, 1)',
+                fontFamily: 'Verdana',
+                fontSize: '14px',
+                textTransform: 'unset',
+                borderRadius: '30px',
+                boxShadow: '0px 4px 10px 0px rgba(252, 132, 45, 0.5)',
+                fontWeight: '700',
+                width: '210px',
+                height: '43px',
+                marginTop: '15px',
+                backgroundColor: 'white',
               }}
             >
-              <Button
-                type="submit"
-                fullWidth
-                variant="outlined"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Log in
-              </Button>
-              <Button variant="outlined" type="submit" sx={{ mt: 3, mb: 2 }}>
-                Register
-              </Button>
-            </Box>
-          </Box>
+              <>Register</>
+            </Button>
+          </Link>
         </Box>
-      </div>
+      </Box>
     </HomePageDesign>
   );
 }
